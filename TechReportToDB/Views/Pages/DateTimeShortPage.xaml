@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="TechReportToDB.Views.Pages.DateTimeShortPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TechReportToDB.Views.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400">
+    <StackPanel Margin="5">
+
+        <Calendar Grid.Row="1"
+               VerticalAlignment="Stretch"
+               Language="ru-RU"
+               SelectedDate="{Binding DateOfReport}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <ComboBox Margin="0" SelectedIndex="{Binding SelectedTime}">
+                <ComboBoxItem Content="c 24:00 до 9:00"/>
+                <ComboBoxItem Content="c 9:00 до 15:30"/>
+                <ComboBoxItem Content="c 15:30 до 24:00"/>
+            </ComboBox>
+
+     
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="100"
+                 Margin="10"
+                 Content="Назад"
+                 Style="{StaticResource MaterialDesignOutlinedButton}"
+                 Command="{Binding GoToDailyReportToDbPageCommand}"/>
+
+            <Button Width="100"
+                 Margin="10"
+                 Content="Выбрать"
+                 Command="{Binding SelectCommand}"/>
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

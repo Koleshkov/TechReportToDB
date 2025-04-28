@@ -1,0 +1,273 @@
+﻿<UserControl x:Class="TechReportToDB.Views.Pages.DBManagerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TechReportToDB.Views.Pages"
+             xmlns:customcontrols="clr-namespace:TechReportToDB.Views.CustomControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             x:Name="DbManager"
+             d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Grid.Row="1" 
+                      Grid.Column="0" 
+                      Grid.ColumnSpan="11" 
+                      Height="5"
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Stretch"
+                      IsEnabled="False"/>
+
+        <GridSplitter Grid.Row="3" 
+                      Grid.Column="1" 
+                      Grid.ColumnSpan="10" 
+                      Height="5"
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Stretch"/>
+
+        <GridSplitter Grid.Row="1" 
+                      Grid.Column="1" 
+                      Grid.RowSpan="4" 
+                      Width="5"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Center" />
+
+        <GridSplitter Grid.Row="1" 
+                        Grid.Column="3" 
+                        Grid.RowSpan="3" 
+                        Width="5"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Center" />
+
+        <GridSplitter Grid.Row="1" 
+                        Grid.Column="5" 
+                        Grid.RowSpan="3" 
+                        Width="5"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Center" />
+
+        <GridSplitter Grid.Row="1" 
+                Grid.Column="7" 
+                Grid.RowSpan="3" 
+                Width="5"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Center" />
+
+        <GridSplitter Grid.Row="1" 
+                Grid.Column="9" 
+                Grid.RowSpan="3" 
+                Width="5"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Center" />
+
+        <!--Search-->
+        <Grid Grid.ColumnSpan="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Назад"
+                        Margin="5"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Command="{Binding GoToDailyReportToDbPageCommand}"/>
+                <Button Content="Киты"
+                        Margin="5"
+                        Command="{Binding GoToSearchByToolsPageCommand}"/>
+                <TextBlock Text="Поиск:"
+                            Margin="5"
+                            FontSize="14"
+                            VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBox  Grid.Column="1"  
+                        Margin="5"
+                        VerticalContentAlignment="Center"
+                        FontSize="12"
+                        Text="{Binding FilterJob, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Работы"
+                       HorizontalAlignment="Center"
+                       Margin="5"/>
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding JobList}" VerticalContentAlignment="Stretch"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     SelectedItem="{Binding SelectedJob, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <StackPanel Margin="0,3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Field}"
+                                           FontWeight="Bold"/>
+                                <TextBlock Text=" к. "
+                                            FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Pad}"
+                                            FontWeight="Bold"/>
+                                <TextBlock Text=" скв. "
+                                            FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Well}"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Полевая партия №"/>
+                                <TextBlock Text="{Binding FieldTeam}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Тел.  "/>
+                                <TextBlock Text="{Binding Phone}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <customcontrols:ToolList Grid.Column="2" Grid.Row="2"
+                                 DataContext="{Binding BHAToolsModel}"/>
+
+        <customcontrols:ToolList Grid.Column="4" Grid.Row="2"
+                                 DataContext="{Binding BackupToolsModel}"/>
+
+        <customcontrols:ToolList Grid.Column="6" Grid.Row="2"
+                                 DataContext="{Binding ForInspectionToolsModel}"/>
+
+        <customcontrols:ToolList Grid.Column="8" Grid.Row="2"
+                                 DataContext="{Binding LostToolsModel}"/>
+
+        <customcontrols:ToolList Grid.Column="10" Grid.Row="2"
+                                 DataContext="{Binding DepToolsModel}"/>
+
+
+
+
+
+        <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.ColumnSpan="2">
+                <TextBlock FontWeight="Bold"
+                           Text="{Binding SelectedJob.Name}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="0,2">
+                    
+                    <TextBlock FontWeight="Bold"
+                               Text="Полевая партия №"/>
+                    <TextBlock FontWeight="Bold"
+                               Text="{Binding SelectedJob.FieldTeam}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2">
+                    <TextBlock Text="Буровой подрядчик: "/>
+                    <TextBlock Text="{Binding SelectedJob.DrillingContractor}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,2">
+                    <TextBlock Text="Номер телефона: "/>
+                    <TextBlock Text="{Binding SelectedJob.Phone}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+
+
+            <StackPanel Grid.Row="2" Margin="0,2">
+                <TextBlock Text="Инженеры DD" 
+                           FontWeight="Bold"/>
+                <ItemsControl ItemsSource="{Binding DDList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left" 
+                                    Padding="0"
+                                    Height="16"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{Binding Name}" 
+                                    Command="{Binding ElementName=DbManager, Path=DataContext.PersonSelectedCommand}"
+                                    CommandParameter="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1"
+                        Margin="0,2">
+                <TextBlock Text="Инженеры MWD" 
+                           FontWeight="Bold"/>
+
+                <ItemsControl ItemsSource="{Binding MWDList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <Button HorizontalContentAlignment="Left" 
+                                    Padding="0"
+                                    Height="16"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{Binding Name}" 
+                                    Command="{Binding ElementName=DbManager, Path=DataContext.PersonSelectedCommand}"
+                                    CommandParameter="{Binding}"/>
+
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="4" Grid.Column="6" Grid.ColumnSpan="5" Margin="5">
+            <TextBlock FontWeight="Bold" HorizontalAlignment="Center">Конструкция скважины</TextBlock>
+            <DataGrid Grid.Row="2" 
+          ItemsSource="{Binding SelectedJob.Constructions}" AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Секция" Binding="{Binding Section}" />
+                    <DataGridTextColumn Header="⌀ долота" Binding="{Binding BitOutDiam, StringFormat={}{0:F2}}" />
+                    <DataGridTextColumn Header="⌀ колонны" Binding="{Binding CaseInsDiam, StringFormat={}{0:F2}}" />
+                    <DataGridTextColumn Header="План" Binding="{Binding DepthProject, StringFormat={}{0:F2}}" />
+                    <DataGridTextColumn Header="Факт" Binding="{Binding DepthFact, StringFormat={}{0:F2}}" />
+                    <DataGridTextColumn Header="ТС" Binding="{Binding Telemetry}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

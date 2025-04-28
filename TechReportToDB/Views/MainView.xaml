@@ -1,0 +1,50 @@
+﻿<Window x:Class="TechReportToDB.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TechReportToDB.Views"
+        xmlns:pagemodels="clr-namespace:TechReportToDB.ViewModels.PageModels"
+        xmlns:pages="clr-namespace:TechReportToDB.Views.Pages"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Style="{StaticResource MaterialDesignWindow}"
+        WindowStartupLocation="CenterScreen"
+        WindowState="{Binding WindowState}"
+        Height="500" Width="600"
+        Title="Tech reports">
+    <Grid Margin="5">
+        <!--Pages-->
+        <ContentControl Padding="5" Grid.Row="1" 
+                    Content="{Binding CurrentPageModel}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type pagemodels:DailyReportToDbPageModel}">
+                    <pages:DailyReportToDbPage/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type pagemodels:DbManagerPageModel}">
+                    <pages:DBManagerPage/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type pagemodels:SearchByToolsPageModel}">
+                    <pages:SearchByToolsPage/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type pagemodels:StaffPageModel}">
+                    <pages:StaffPage/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type pagemodels:PadMapPageModel}">
+                    <pages:PadMapPage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type pagemodels:DateTimePageModel}">
+                    <pages:DateTimePage/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type pagemodels:DateTimeShortPageModel}">
+                    <pages:DateTimeShortPage/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

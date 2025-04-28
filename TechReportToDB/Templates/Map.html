@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yandex Map</title>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=be7bead5-dd0a-43f9-92bc-1ba664d4e43d&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 97vh;"></div>
+    <script type="text/javascript">
+        var map;
+        var placemarks = [];
+
+        ymaps.ready(function () {
+            // Создаем карту
+            map = new ymaps.Map('map', {
+                center: [55.751574, 37.573856], // Начальные координаты: Москва
+                zoom: 5
+            });
+
+            // Добавляем элемент управления линейкой
+            map.controls.add('rulerControl', {
+                float: 'right' // Расположение элемента управления
+            });
+        });
+
+        // Функция для добавления маркеров
+        function addMarkers(markerList) {
+            // Очищаем предыдущие маркеры
+            placemarks.forEach(function (placemark) {
+                map.geoObjects.remove(placemark);
+            });
+            placemarks = [];
+
+            // Добавляем новые маркеры
+            markerList.forEach(function (marker) {
+                var placemark = new ymaps.Placemark([marker.latitude, marker.longitude], {
+                    hintContent: marker.hint,
+                    balloonContent: marker.balloon
+                });
+
+                placemarks.push(placemark);
+                map.geoObjects.add(placemark);
+            });
+        }
+
+        // Функция для перемещения к выбранному маркеру
+        function moveToMarker(latitude, longitude) {
+            map.setCenter([latitude, longitude], 5); // Центрируем карту
+        }
+    </script>
+</body>
+</html>

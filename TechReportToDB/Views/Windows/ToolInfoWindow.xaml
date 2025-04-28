@@ -1,0 +1,94 @@
+﻿<Window x:Class="TechReportToDB.Views.Windows.ToolInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TechReportToDB.Views.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Информация о приборе" Height="450" Width="450">
+    <Grid Margin="5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextAlignment="Center"
+                   Text="{Binding Tool.Name}"/>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Серийный номер: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.SerialNumber}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Артикул: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Art}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Типоразмер: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Size}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Класс: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.ToolClass}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Принадлежность: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Owner}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Паспорт: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Pasport}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Наработка после ТО: " FontSize="14" />
+                <TextBlock Text="{Binding Tool.CircTimeAfterInspection}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Общая наработка: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.CircTime}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Дата ТО: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.InspectionDate}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Дней до ТО: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Days}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Статус: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Status}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Дата прибытия: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.ArrivalDate}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="От куда: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.From}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Дата отправки: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.DepartureDate}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Куда: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.To}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Резьба верх: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.TopThread}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Резьба низ: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.BottomTread}" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Остаток на стейве: " FontSize="14"/>
+                <TextBlock Text="{Binding Tool.Battery}" FontSize="14"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

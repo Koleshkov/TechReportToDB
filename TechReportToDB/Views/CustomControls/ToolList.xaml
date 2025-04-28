@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="TechReportToDB.Views.CustomControls.ToolList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TechReportToDB.Views.CustomControls"
+             mc:Ignorable="d" 
+             x:Name="ToolListComponent"
+             d:DesignHeight="800" d:DesignWidth="450">
+    <Grid Grid.Column="2"
+           Grid.Row="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+            Text="{Binding Title}"
+            HorizontalAlignment="Center"
+            Margin="5"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" 
+                      VerticalAlignment="Stretch">
+
+            <ItemsControl Name="ButtonsItemsControl" 
+                          ItemsSource="{Binding Tools}"
+                  HorizontalContentAlignment="Left">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Cursor="Hand">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#DDDDDD"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <StackPanel Margin="0,5">
+                                <TextBlock Text="{Binding Name}" 
+                                           FontWeight="Bold" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="S/N: " />
+                                    <TextBlock Text="{Binding SerialNumber}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Border.InputBindings>
+                                <MouseBinding Command="{Binding ElementName=ToolListComponent, Path=DataContext.ToolSelectedCommand}"
+                                              CommandParameter="{Binding}"
+                                              Gesture="LeftClick"/>
+                            </Border.InputBindings>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
