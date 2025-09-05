@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using TechReportToDB.ViewModels.Base;
 
 namespace TechReportToDB.Services.Navigation

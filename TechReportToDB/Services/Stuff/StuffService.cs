@@ -1,14 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using OfficeOpenXml.Table;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechReportToDB.Data.Entities;
-using TechReportToDB.Data.Models.Workstations;
 
 namespace TechReportToDB.Services.Stuff
 {

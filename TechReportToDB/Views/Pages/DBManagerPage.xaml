@@ -97,9 +97,9 @@
                         Margin="5"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         Command="{Binding GoToDailyReportToDbPageCommand}"/>
-                <Button Content="Киты"
+                <Button Content="Выгрузка ToolBoard"
                         Margin="5"
-                        Command="{Binding GoToSearchByToolsPageCommand}"/>
+                        Command="{Binding ExportToJsonCommand}"/>
                 <TextBlock Text="Поиск:"
                             Margin="5"
                             FontSize="14"
@@ -192,23 +192,39 @@
                            Text="{Binding SelectedJob.Name}"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <StackPanel Orientation="Horizontal" Margin="0,2">
-                    
-                    <TextBlock FontWeight="Bold"
-                               Text="Полевая партия №"/>
-                    <TextBlock FontWeight="Bold"
-                               Text="{Binding SelectedJob.FieldTeam}"/>
-                </StackPanel>
+                <TextBlock>
+                    <Hyperlink Command="{Binding OpenEmailCommand}"
+                               CommandParameter="{Binding SelectedJob.FieldTeam}"
+                               TextDecorations="{x:Null}"
+                               Foreground="#3F54BB">    
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="Полевая партия № "/>
+                            <TextBlock Text="{Binding SelectedJob.FieldTeam}"/>      
+                         </StackPanel>
+                    </Hyperlink>
+                 </TextBlock>
+
+
                 <StackPanel Orientation="Horizontal" Margin="0,2">
                     <TextBlock Text="Буровой подрядчик: "/>
                     <TextBlock Text="{Binding SelectedJob.DrillingContractor}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,2">
-                    <TextBlock Text="Номер телефона: "/>
-                    <TextBlock Text="{Binding SelectedJob.Phone}"/>
-                </StackPanel>
 
+
+                <TextBlock>
+                    <Hyperlink Command="{Binding OpenPhoneCommand}"
+                               CommandParameter="{Binding SelectedJob.Phone}"
+                               TextDecorations="{x:Null}"
+                               Foreground="#3F54BB">   
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="Тел.: "/>
+                             <TextBlock Text="{Binding SelectedJob.Phone}"/> 
+                        </StackPanel>
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
+
+
 
 
 

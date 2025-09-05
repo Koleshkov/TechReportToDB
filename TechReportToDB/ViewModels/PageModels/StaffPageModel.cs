@@ -34,7 +34,7 @@ namespace TechReportToDB.ViewModels.PageModels
         [ObservableProperty]
         private string filterPerson = "";
 
-        public StaffPageModel(INavigationService navigationService, IRepo<MWD> mwdRepo, 
+        public StaffPageModel(INavigationService navigationService, IRepo<MWD> mwdRepo,
             IRepo<DD> ddRepo, IStuffFService stuffFService)
         {
             this.navigationService = navigationService;
@@ -46,7 +46,7 @@ namespace TechReportToDB.ViewModels.PageModels
 
             FiltredPersonList = CollectionViewSource.GetDefaultView(PersonList);
             FiltredPersonList.Filter = FilterBySearchText;
-            
+
         }
 
         private async void UpdatePersonList()
@@ -74,7 +74,7 @@ namespace TechReportToDB.ViewModels.PageModels
 
                 throw;
             }
-            
+
         }
 
         private bool FilterBySearchText(object item)
@@ -85,7 +85,6 @@ namespace TechReportToDB.ViewModels.PageModels
                 if (string.IsNullOrWhiteSpace(FilterPerson))
                     return true;
 
-                return itemName.FilterName.ToLower().Contains(FilterPerson.ToLower());
             }
             return false;
         }
@@ -160,6 +159,40 @@ namespace TechReportToDB.ViewModels.PageModels
                     // Логируем ошибку, если не удалось открыть
                     Console.WriteLine($"Ошибка при открытии Telegram: {ex.Message}");
                 }
+            }
+        }
+
+        [RelayCommand]
+        private void OpenPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                Console.WriteLine("Номер телефона не указан");
+                return;
+            }
+
+            // Нормализация номера (удаляем всё, кроме цифр и +)
+            var cleanNumber = new string(phone.Where(c => char.IsDigit(c) || c == '+').ToArray());
+
+            // Если номер начинается с 8 (российский номер без кода страны)
+            if (cleanNumber.StartsWith("8") && cleanNumber.Length > 1)
+            {
+                cleanNumber = "+7" + cleanNumber[1..];
+            }
+            // Если номер начинается с 7, но нет + (российский номер)
+            else if (cleanNumber.StartsWith("7") && !cleanNumber.StartsWith("+7") && cleanNumber.Length > 1)
+            {
+                cleanNumber = "+" + cleanNumber;
+            }
+
+            try
+            {
+                // Правильный формат для tel: URI
+                Process.Start(new ProcessStartInfo($"tel:{cleanNumber}") { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при открытии телефона: {ex.Message}");
             }
         }
 

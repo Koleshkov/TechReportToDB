@@ -8,9 +8,9 @@
     <UseWPF>true</UseWPF>
 	 <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Styles\Icons\icon.ico</ApplicationIcon>
-	  <AssemblyVersion>1.0.3.8</AssemblyVersion>
-	  <FileVersion>1.0.3.8</FileVersion>
-	  <Version>1.0.3</Version>
+	  <AssemblyVersion>1.0.5.1</AssemblyVersion>
+	  <FileVersion>1.0.5.1</FileVersion>
+	  <Version>1.0.5</Version>
 	  <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 

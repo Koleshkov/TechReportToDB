@@ -1,6 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using Microsoft.Office.Interop.Outlook;
-using Microsoft.Win32;
 using System.IO;
 using TechReportToDB.Data.Models.ShortReport;
 using TechReportToDB.Services.Navigation;

@@ -51,7 +51,7 @@
             <DataGrid Grid.Row="2" 
                       ItemsSource="{Binding FiltredPersonList}" 
                       AutoGenerateColumns="False"
-                      IsReadOnly="True" 
+                      IsReadOnly="False" 
                       CanUserAddRows="False" 
                     CanUserDeleteRows="False"
                      SelectionMode="Single">
@@ -61,11 +61,33 @@
                     <DataGridTextColumn Header="Куст" Binding="{Binding Job.Pad}" />
                     <DataGridTextColumn Header="Скважина" Binding="{Binding Job.Well}" />
                     <DataGridTextColumn Header="Тип скв." Binding="{Binding Job.Type}" />
-                    <DataGridTextColumn Header="Тел. ПП" Binding="{Binding Job.Phone}" />
+                    <DataGridTemplateColumn Header="Тел. ПП">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.OpenPhoneCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                           CommandParameter="{Binding Job.Phone}">
+                                        <TextBlock Text="{Binding Job.Phone}" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="Должность" Binding="{Binding Position}" />
                     <DataGridTextColumn Header="Дата устройства" Binding="{Binding DateOfJob}" />
-                    <DataGridTextColumn Header="Тел. личный" Binding="{Binding Phone}" />
+                    <DataGridTemplateColumn Header="Тел. личный">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.OpenPhoneCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                               CommandParameter="{Binding Phone}">
+                                               <TextBlock Text="{Binding Phone}" />
+                                     </Hyperlink>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="WhatsApp">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

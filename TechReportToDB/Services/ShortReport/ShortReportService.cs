@@ -1,9 +1,7 @@
-﻿using Microsoft.Office.Interop.Excel;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System.IO;
 using TechReportToDB.Converters;
-using TechReportToDB.Data.Entities;
 using TechReportToDB.Data.Models.ShortReport;
 using TechReportToDB.Services.Outlook;
 

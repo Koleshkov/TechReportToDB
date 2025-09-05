@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Style="{StaticResource MaterialDesignWindow}"
         WindowStartupLocation="CenterScreen"
-        Title="Крточка сотрудника" Height="250" Width="450">
+        Title="Карточка сотрудника" Height="250" Width="450">
     <Window.Resources>
         <Style TargetType="TextBlock" >
             <Setter Property="FontSize" Value="16"/>
         </Style>
     </Window.Resources>
-    <StackPanel Margin="5">
+    <StackPanel Margin="5" HorizontalAlignment="Center">
         <TextBlock HorizontalAlignment="Center"
                    Text="Карточка сотрудника"/>
         <StackPanel Orientation="Horizontal"
@@ -30,7 +30,7 @@
             <TextBlock Text="{Binding Person.Position}"/>
 
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal"
             Margin="0,2"
             HorizontalAlignment="Center">
@@ -45,17 +45,38 @@
             <TextBlock Text="{Binding Person.DateOfJob}"/>
 
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
-            Margin="0,2"
-            HorizontalAlignment="Center">
-            <TextBlock Text="Телефон:"/>
-            <TextBlock>
-        <Hyperlink Command="{Binding OpenWhatsAppCommand}"
-                   CommandParameter="{Binding Person.Phone}">
-            <Run Text="{Binding Person.Phone}"/>
-        </Hyperlink>
-            </TextBlock>
-        </StackPanel>
 
+
+        <TextBlock HorizontalAlignment="Center">
+            <Hyperlink Command="{Binding OpenPhoneCommand}"
+                   CommandParameter="{Binding Person.Phone}"
+                   TextDecorations="{x:Null}"
+                   Foreground="#3F54BB">  
+                <StackPanel Orientation="Horizontal" 
+                            Margin="0,2">
+                <TextBlock Text="Телефон: "/>
+                <TextBlock Text="{Binding Person.Phone}"/>  
+                </StackPanel>
+            </Hyperlink>
+        </TextBlock>
+
+
+        <TextBlock HorizontalAlignment="Center">
+            <Hyperlink Command="{Binding OpenWhatsAppCommand}"
+                   CommandParameter="{Binding Person.Phone}"
+                   TextDecorations="{x:Null}"
+                   Foreground="#1B8755">
+            <TextBlock Text="WhatsApp"/> 
+            </Hyperlink>
+        </TextBlock>
+
+        <TextBlock HorizontalAlignment="Center">
+            <Hyperlink Command="{Binding OpenTelegramCommand}"
+                       CommandParameter="{Binding Person.Phone}"
+                       TextDecorations="{x:Null}"
+                       Foreground="#1D94CF">
+                <TextBlock Text="Telegram"/> 
+            </Hyperlink>
+        </TextBlock>
     </StackPanel>
 </Window>

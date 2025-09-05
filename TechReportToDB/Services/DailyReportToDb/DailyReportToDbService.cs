@@ -1,14 +1,11 @@
 ﻿using ExcelDataReader;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Office.Interop.Excel;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 using System.Data;
 using System.IO;
-using System.Windows;
 using TechReportToDB.Converters;
-using TechReportToDB.Data;
 using TechReportToDB.Data.Entities;
 using TechReportToDB.Services.Navigation;
 using TechReportToDB.Services.Repos;
@@ -73,6 +70,8 @@ namespace TechReportToDB.Services.DailyReportToDb
                         string fileName = Path.GetFileName(files[i]).Replace("_ПС_", "_");
                         string[] splitedFileName = fileName.Split("_");
 
+
+
                         job.FilePath = files[i];
 
                         var tempDate = splitedFileName[4].Split(".")[0].Split("-");
@@ -83,7 +82,6 @@ namespace TechReportToDB.Services.DailyReportToDb
 
                         using (var stream = File.Open(files[i], FileMode.Open, FileAccess.Read))
                         {
-                            
 
                             using (var reader = ExcelReaderFactory.CreateReader(stream))
                             {
@@ -123,7 +121,7 @@ namespace TechReportToDB.Services.DailyReportToDb
                                                         Telemetry = telemetry
                                                     });
                                                 }
-                                                
+
 
                                                 var name = reader.GetValue(28)?.ToString()?.TrimEnd();
 
@@ -141,8 +139,8 @@ namespace TechReportToDB.Services.DailyReportToDb
                                                     }
                                                 }
 
-                                                
-                                                
+
+
                                             }
 
                                             if (rowIndex == 6)
@@ -366,6 +364,7 @@ namespace TechReportToDB.Services.DailyReportToDb
                                                     }
                                                 }
                                             }
+
                                             rowIndex++;
                                         }
                                     }
@@ -381,64 +380,59 @@ namespace TechReportToDB.Services.DailyReportToDb
 
 
 
-                                    if (reader.Name == "График")
-                                    {
-                                        rowIndex = 0;
-                                        double lat = 0;
-                                        double lon = 0;
+                                    //if (reader.Name == "График")
+                                    //{
+                                    //    rowIndex = 0;
+                                    //    double lat = 0;
+                                    //    double lon = 0;
+
+                                    //    while (reader.Read() && rowIndex < 64)
+                                    //    {
+                                    //        try
+                                    //        {
 
 
-                                        bool readbreak = true;
+                                    //            if (rowIndex == 61)
+                                    //            {
+                                    //                //положительные значения: «N» северная широта, «E» восточная долгота
+                                    //                //отрицательные значения: «S» южная широта, «W» западная долгота
+
+                                    //                var latType = reader.GetValue(6)?.ToString();
+                                    //                var latGrad = CC.ConvertStringToDouble(reader.GetValue(7)?.ToString());
+                                    //                var latMin = CC.ConvertStringToDouble(reader.GetValue(8)?.ToString());
+                                    //                var latSec = CC.ConvertStringToDouble(reader.GetValue(9)?.ToString());
+
+                                    //                lat = ((((latSec ?? 0) / 60) + (latMin ?? 0)) / 60) + (latGrad ?? 0);
+
+                                    //                if (latType == "S") lat = lat * (-1);
+                                    //            }
+
+                                    //            if (rowIndex == 62)
+                                    //            {
+                                    //                var longType = reader.GetValue(6)?.ToString();
+                                    //                var longGrad = CC.ConvertStringToDouble(reader.GetValue(7)?.ToString());
+                                    //                var longMin = CC.ConvertStringToDouble(reader.GetValue(8)?.ToString());
+                                    //                var longSec = CC.ConvertStringToDouble(reader.GetValue(9)?.ToString());
+
+                                    //                lon = ((((longSec ?? 0 / 60)) + (longMin ?? 0)) / 60) + (longGrad ?? 0);
+
+                                    //                if (longType == "W") lon = lon * (-1);
+                                    //            }
+
+                                    //        }
+                                    //        catch (Exception ex)
+                                    //        {
+                                    //            var msg = ex.Message;
+                                    //            continue;
+                                    //        }
+                                    //        rowIndex++;
+
+                                    //    }
+                                    //    job.Latitude = lat;
+                                    //    job.Longitude = lon;
 
 
-                                        while (rowIndex < 63)
-                                        {
-                                            try
-                                            {
-                                                readbreak = reader.Read();
-
-
-                                                if (rowIndex == 61)
-                                                {
-                                                    //положительные значения: «N» северная широта, «E» восточная долгота
-                                                    //отрицательные значения: «S» южная широта, «W» западная долгота
-
-                                                    var latType = reader.GetValue(6)?.ToString();
-                                                    var latGrad = CC.ConvertStringToDouble(reader.GetValue(7)?.ToString());
-                                                    var latMin = CC.ConvertStringToDouble(reader.GetValue(8)?.ToString());
-                                                    var latSec = CC.ConvertStringToDouble(reader.GetValue(9)?.ToString());
-
-                                                    lat = ((((latSec ?? 0) / 60) + (latMin ?? 0)) / 60) + (latGrad ?? 0);
-
-                                                    if (latType == "S") lat = lat * (-1);
-                                                }
-
-                                                if (rowIndex == 62)
-                                                {
-                                                    var longType = reader.GetValue(6)?.ToString();
-                                                    var longGrad = CC.ConvertStringToDouble(reader.GetValue(7)?.ToString());
-                                                    var longMin = CC.ConvertStringToDouble(reader.GetValue(8)?.ToString());
-                                                    var longSec = CC.ConvertStringToDouble(reader.GetValue(9)?.ToString());
-
-                                                    lon = ((((longSec ?? 0 / 60)) + (longMin ?? 0)) / 60) + (longGrad ?? 0);
-
-                                                    if (longType == "W") lon = lon * (-1);
-                                                }
-
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                var msg = ex.Message;
-                                                continue;
-                                            }
-                                            rowIndex++;
-
-                                        }
-                                        job.Latitude = lat;
-                                        job.Longitude = lon;
-
-
-                                    }
+                                    //}
 
                                     if (reader.Name == "Оборудование")
                                     {
@@ -468,7 +462,7 @@ namespace TechReportToDB.Services.DailyReportToDb
 
                                                 tool.InspectionDate = CC.ConvertStringToDateTimeString(reader.GetValue(7)?.ToString());
 
-                                                tool.Days = CC.ConvertStringToInt(reader.GetValue(8)?.ToString()); 
+                                                tool.Days = CC.ConvertStringToInt(reader.GetValue(8)?.ToString());
 
                                                 tool.CircTimeAfterInspection = CC.ConvertStringToDouble(reader.GetValue(10)?.ToString());
 
@@ -573,7 +567,8 @@ namespace TechReportToDB.Services.DailyReportToDb
                                         || reader.Name == "АКСЛ_НКС"
                                         || reader.Name == "Инструментальный ящик"
                                         || reader.Name == "ИТ_ВАГОНЫ"
-                                        || reader.Name == "Ящик_ИИИ")
+                                        || reader.Name == "Ящик_ИИИ"
+                                        || reader.Name == "Фрегат")
                                     {
                                         rowIndex = 0;
 
@@ -694,7 +689,7 @@ namespace TechReportToDB.Services.DailyReportToDb
                                 DateOfBirt = worksheet.Cells[row, 3].Text.TrimEnd(),
                                 DateOfJob = worksheet.Cells[row, 4].Text.TrimEnd(),
                                 Phone = worksheet.Cells[row, 5].Text.TrimEnd(),
-                                JobId=null
+                                JobId = null
                             });
 
                         if (worksheet.Cells[row, 2].Text.Contains("УТСБ"))
@@ -1010,14 +1005,15 @@ namespace TechReportToDB.Services.DailyReportToDb
                         worksheet.Cells[row, 5].Value = kitTool.Kit.Name;
                         worksheet.Cells[row, 6].Value = kitTool.Name;
                         worksheet.Cells[row, 7].Value = kitTool.SerialNumber;
-                        worksheet.Cells[row, 8].Value = kitTool.QuantityFact;
-                        worksheet.Cells[row, 9].Value = kitTool.Status;
-                        worksheet.Cells[row, 10].Value = kitTool.Comment;
-                        worksheet.Cells[row, 11].Value = kitTool.ArrivalDate;
-                        worksheet.Cells[row, 12].Value = kitTool.From;
-                        worksheet.Cells[row, 13].Value = kitTool.DepartureDate;
-                        worksheet.Cells[row, 14].Value = kitTool.To;
-                        worksheet.Cells[row, 15].Value = kitTool.Kit.Job.FilePath;
+                        worksheet.Cells[row, 8].Value = kitTool.Art;
+                        worksheet.Cells[row, 9].Value = kitTool.QuantityFact;
+                        worksheet.Cells[row, 10].Value = kitTool.Status;
+                        worksheet.Cells[row, 11].Value = kitTool.Comment;
+                        worksheet.Cells[row, 12].Value = kitTool.ArrivalDate;
+                        worksheet.Cells[row, 13].Value = kitTool.From;
+                        worksheet.Cells[row, 14].Value = kitTool.DepartureDate;
+                        worksheet.Cells[row, 15].Value = kitTool.To;
+                        worksheet.Cells[row, 16].Value = kitTool.Kit.Job.FilePath;
                         table.AddRow();
                         row++;
                     }

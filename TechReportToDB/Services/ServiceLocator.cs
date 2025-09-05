@@ -5,6 +5,7 @@ using System.IO;
 using TechReportToDB.Data;
 using TechReportToDB.Services.DailyReportToDb;
 using TechReportToDB.Services.Equip;
+using TechReportToDB.Services.JobToJson;
 using TechReportToDB.Services.Navigation;
 using TechReportToDB.Services.Outlook;
 using TechReportToDB.Services.Repos;
@@ -12,13 +13,10 @@ using TechReportToDB.Services.ShortReport;
 using TechReportToDB.Services.Stuff;
 using TechReportToDB.Services.WorkstationReportToDb;
 using TechReportToDB.ViewModels;
-using TechReportToDB.ViewModels.CustomControlModels;
 using TechReportToDB.ViewModels.PageModels;
 using TechReportToDB.ViewModels.WindowModels;
 using TechReportToDB.Views;
-using TechReportToDB.Views.CustomControls;
 using TechReportToDB.Views.Pages;
-using TechReportToDB.Views.Windows;
 
 namespace TechReportToDB.Services
 {
@@ -61,6 +59,7 @@ namespace TechReportToDB.Services
             services.AddSingleton<IStuffFService, StuffService>();
 
             services.AddSingleton<IEquipToExcel, EquipToExcel>();
+            services.AddSingleton<IJobToJsonService, JobToJsonService>();
 
             #endregion
 

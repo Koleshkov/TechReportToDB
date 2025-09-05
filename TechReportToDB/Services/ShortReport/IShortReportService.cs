@@ -1,4 +1,4 @@
-﻿using TechReportToDB.Data.Models.ShortReport;
+﻿
 
 namespace TechReportToDB.Services.ShortReport
 {

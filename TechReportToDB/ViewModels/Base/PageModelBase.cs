@@ -1,7 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.DependencyInjection;
-using TechReportToDB.Services;
-using TechReportToDB.Services.Navigation;
 
 namespace TechReportToDB.ViewModels.Base
 {
